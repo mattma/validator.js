@@ -25,7 +25,17 @@
     if (typeof exports !== 'undefined' && typeof module !== 'undefined') {
         module.exports = definition();
     } else if (typeof define === 'function' && typeof define.amd === 'object') {
-        define(definition);
+        // define(definition);
+
+        // change #1, add the default object for ES6, invoke function to retrieve validator object itself
+        // @usage in ES6 environment
+        // import validator from 'validator';
+        // console.log('validator: ', validator.version);   // validator:  3.26.0
+        define(name, function(){
+          return {
+            default: definition()
+          }
+        });
     } else {
         this[name] = definition();
     }
